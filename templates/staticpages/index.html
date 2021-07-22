@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        {% if user.is_authenticated %}<meta http-equiv="Refresh" content="0; url='{% url 'core:overview' %}'" />{% endif %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Welcome!</title>
+        <!-- Google Font -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900"
+            rel="stylesheet">
+        <!-- Bootstrap 4.2.1 -->
+        <link rel="stylesheet" href="{% static 'css/plugins/bootstrap.min.css'%}">
+        <!-- Magnific Popup -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+        <!-- Font Awesome -->
+        <link
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            rel="stylesheet">
+        <!-- Main CSS -->
+        <link rel="stylesheet" href="{% static 'css/main.css'%}">
+    </head>
+    <body>
+        <!-- Page Loading -->
+        <div class="se-pre-con"></div>
+
+        <!-- ========== Start Navbar ========== -->
+        <nav class="navbar navbar-expand-lg navbar-dark  fixed-top">
+            <div class="container">
+                <a class="navbar-brand" target="_blank" href="https://www.horizon-development.com"><img src="{% static 'img/logo.png'%}"></a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#home">Home
+                                <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#intro">Intro</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#login">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- ========== End Navbar ========== -->
+
+        <!-- ========== Start Slider ========== -->
+        <section class="slider d-flex align-items-center" id="home">
+            <div id="particles-js"></div>
+            <div class="container">
+                <div class="row d-flex align-items-center mt-60">
+                    <div class="col-lg-6">
+                        <div class="text">
+                            <h1 class="h1-w mb-20">Welcome to the Horizon Development</h1>
+                            <p class="p-w mb-30">We are glad you are here! you are AMAZING!!! You passed by the interviews.</p>
+                            <a href="#about" class="btn-white d-inline-block">Get Started</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="image d-flex justify-content-lg-end">
+                            <img src="{% static 'img/horizon-front.png' %}"  class="img-fluid upDown">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ========== End Slider ========== -->
+
+        <!-- ========== Start About ========== -->
+        <section class="about m-section-120" id="about">
+            <div class="container">
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-6">
+                        <div class="image pr-4">
+                            <img src="http://www.horizon-development.com/static/img/services.jpg" alt="about" class="img-fluid">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h2 class="h2 mb-20">
+                            Horizon Development
+                            <br>
+                            Basic Informations</h2>
+                        <p class="p-bk mb-30">{% lorem 1 b random %}
+                        </p>
+                        <a href="#intro" class="btn-color d-inline-block">Introduction</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ========== End About ========== -->
+
+        
+
+
+        <!-- ========== Start Video ========== -->
+        <section class="video" id="intro">
+            <div class="container text-center">
+                <div class="video-icon">
+                    <div class="icon-abs">
+                        <a
+                            href="https://www.youtube.com/"
+                            class="icon pulse expand video-link">
+                            <i class="fa fa-play" aria-hidden="true"></i><br>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ========== End Video ========== -->
+
+        <!-- ========== Start Login ========== -->
+            <section class="contact" id="login">
+                    <div class="container text-center">
+                            <h2 class="h2 mb-15"> Get in!!</h2>
+                            <p class="p-bk mb-60">Check your Email!! 
+                                <br>
+                                If you do not get the Email or lost your login Send an Email to admin@horizon-development.com</p>
+                        <div class="row">
+                            <div class="col-md-6 offset-md-3">
+        
+                                <form method="POST" action="{% url 'accounts:login' %}">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <input type="email" class="form-control" placeholder="Email" name="email">
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <input type="password" class="form-control" placeholder="Password" name="password">
+                                        </div>
+                                    </div>
+                                    <input class="btn btn-block" type="submit" name="submit" value = "Submit">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            <!-- ========== End Login ========== -->
+
+            <!-- ========== Start Footer ========== -->
+            <footer class="footer">
+                    <div class="container text-center text-white">
+                        <img src="{% static 'img/bux-logo.png'%}" alt="">
+                        <h2>Copyright © 2021 Horizon Development. All Rights Reserved.</h2>
+                    </div>
+                </footer>
+            <!-- ========== End Footer ========== -->
+
+        <!-- ========== JS ========== -->
+        <script src="{% static 'js/plugins/jquery-3.3.1.min.js'%}"></script>
+        <script src="{% static 'js/plugins/popper.min.js'%}"></script>
+        <script src="{% static 'js/plugins/bootstrap.min.js'%}"></script>
+        <!-- Particels JS -->
+        <script src="{% static 'js/plugins/particles.min.js'%}"></script>
+        <script src="{% static 'js/plugins/app.js'%}"></script>
+        <!-- Smooth Scrolling -->
+        <script src="{% static 'js/plugins/jquery.smoothscroll.min.js'%}"></script>
+        <!-- Magnific Popup -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+        <script src="{% static 'js/main.js'%}"></script>
+    </body>
+</html>

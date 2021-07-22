@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Tasks | {{user.first_name}}{% endblock title %}
+{% block css %} <link rel="stylesheet" href="{% static 'css/task.css' %}"> {% endblock css %}
+{% block content %}
+<div class="center-align">
+    <div class="modallist">
+{% for task_name in  task %}
+    {% if user.username in task_name.assigned_to.username %}
+        <div class="content {{task_name.id}}" id="{{task_name.id}}">
+            <h1>{{task_name.task_name}}</h1>
+            <p>Assiged to: {{task_name.assigned_to}}</p>
+            <p>Due date: {{task_name.due_date}}</p>
+            <p>Stimated time: {{task_name.work_hours}} hours</p>
+        </div>
+    {% endif %}
+{% endfor %}
+    </div>
+</div>
+{% for task_name in  task %}
+    {% if user.username in task_name.assigned_to.username %}
+<div class="modal {{task_name.id}}" id="{{task_name.id}}">
+    <div class="modal-bg">
+        <div class="header-modal">
+            <h1>{{task_name.task_name}}</h1>
+            <p>Assiged to: {{task_name.assigned_to}}</p>
+            <p>Due date: {{task_name.due_date}}</p>
+            <p>Stimated time: {{task_name.work_hours}} hours</p>
+            <div class="exit-icon">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="content-modal">
+            <div class="about">
+                <p>{{task_name.about_task}}</p>
+            </div>
+            <p>{{task_name.client_name}}</p><br/>
+            <a target="_blank" href="{{task_name.files_link}}">Download Files</a>
+        </div>
+    </div>
+</div>
+    {% endif %}
+{% endfor %}
+{% endblock content %}
+{% block script %}
+{% for task_name in  task %}
+    {% if user.username in task_name.assigned_to.username %}
+<script>
+$(document).ready(function() {
+    $(".{{task_name.id}}").click(function() {
+        $(".{{task_name.id}}").addClass("active");
+    });
+});
+</script>
+    {% endif %}
+{% endfor %}
+<script>
+$(document).ready(function() {
+    $(".exit-icon").click(function() {
+        location.reload();
+    });
+});
+</script>
+{% endblock script %}

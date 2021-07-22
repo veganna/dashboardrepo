@@ -1,0 +1,415 @@
+:root {
+    --grad: linear-gradient(to bottom right, purple, #fff);
+    --clip: polygon(52% 65%, 100% 38%, 100% 0, 0 0, 0% 38%);
+    --shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    --c: #eaeaea;
+    --g: purple;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 0px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #525965;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #525965;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: #525965;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-track:hover {
+    background: transparent;
+}
+
+::-webkit-scrollbar-track:active {
+    background: transparent;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+@font-face {
+    src: url("q.ttf");
+    font-family: f;
+}
+
+body {
+    font-family: f;
+    color: #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.grad {
+    clip-path: var(--clip);
+    background-image: var(--grad);
+    height: 100vh;
+    min-height: 800px;
+    width: 100%;
+    position: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+.main_body {
+    width: 900px;
+    height: 600px;
+    position: relative;
+    z-index: 99999;
+    margin-top: -30em;
+    margin-bottom: 5em;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: var(--shadow);
+    border-radius: 5px;
+    background: white;
+    display: flex;
+}
+
+.left {
+    width: 280px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--c);
+}
+
+.left1,
+.left2,
+.left3 {
+    width: 100%;
+}
+
+.left1 {
+    height: 50px;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid var(--c);
+}
+
+.left1 h3 {
+    color: purple;
+}
+
+.left2 {
+    width: 280px;
+    height: 50px;
+    position: absolute;
+    top: 50px;
+    border-bottom: 1px solid var(--c);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left3 {
+    width: 280px;
+    height: calc(100% - 100px);
+    overflow-y: auto;
+    margin-top: 50px;
+}
+
+.in {
+    border: none;
+    outline: none;
+    font-family: f;
+    margin-left: 10px;
+    width: 220px;
+    background: #f0f2f5;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.ico1 {
+    background: var(--g);
+    border-radius: 5px;
+    width: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+    height: 33px;
+    margin-right: 10px;
+}
+
+.ico11 {
+    background: var(--g);
+    border-radius: 5px;
+    width: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+    height: 33px;
+}
+
+ul li {
+    list-style: none;
+    color: white;
+}
+
+.friend {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    transition: 0.6s ease;
+    height: 60px;
+    border-bottom: 1px solid var(--c);
+    background: purple;
+    cursor: pointer;
+}
+
+img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+}
+
+.img_name {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    margin-left: 7px;
+}
+
+p {
+    color: white;
+    font-size: 10.5px;
+}
+
+h4 {
+    font-size: 13px;
+}
+
+.img_name div {
+    margin-left: 5px;
+}
+
+.time {
+    margin-right: 10px;
+    color: grey;
+    font-size: 11px;
+}
+
+.friend:hover {
+    background: rgba(128, 0, 128, 0.4);
+}
+
+span {
+    font-weight: bold;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+}
+
+.right1 {
+    height: 50px;
+    width: 620px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--c);
+    background: rgba(128, 0, 128, 0.6);
+}
+
+.icos {
+    margin-right: 20px;
+    display: flex;
+}
+
+.svg_icon {
+    padding: 7px;
+    border-radius: 5px;
+    background: red;
+    margin-right: 10px;
+}
+
+.right2 {
+    height: calc(100% - 100px);
+    width: 620px;
+    border-bottom: 1px solid var(--c);
+    overflow-y: auto;
+}
+
+.right3 {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    width: 621px;
+    overflow-y: auto;
+    justify-content: center;
+}
+
+.form {
+    width: 590px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+
+form {
+    width: 590px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+}
+
+.in2 {
+    border: none;
+    outline: none;
+    font-family: f;
+    width: 480px;
+}
+
+.top {
+    padding: 10px;
+    border-radius: 5px;
+    background: #cddc39;
+    width: 80%;
+    margin: auto;
+}
+
+.p {
+    color: white;
+    font-size: 12px;
+}
+
+#chat {
+    padding-left: 0;
+    margin: 0;
+    list-style-type: none;
+    overflow-y: scroll;
+    border-bottom: 2px solid #fff;
+}
+
+#chat li {
+    padding: 10px;
+}
+
+#chat h2,
+#chat h3 {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+#chat h3 {
+    color: #bbb;
+}
+
+#chat .entete {
+    margin-bottom: 5px;
+}
+
+#chat .message {
+    word-wrap: break-word;
+    color: #fff;
+    line-height: 25px;
+    padding: 6px;
+    max-width: 90%;
+    display: inline-block;
+    text-align: left;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#chat .me {
+    text-align: right;
+}
+
+#chat .you .message {
+    background-color: purple;
+}
+
+#chat .me .message {
+    background-color: var(--g);
+}
+
+#chat .triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+}
+
+#chat .you .triangle {
+    border-color: transparent transparent purple transparent;
+    margin-left: 15px;
+}
+
+#chat .me .triangle {
+    border-color: transparent transparent var(--g) transparent;
+    margin-left: calc(100% - 30px);
+}
+
+.mess {
+    color: white;
+    font-size: 13px;
+}
+
+.blue {
+    background-color: var(--g);
+    margin-right: 0;
+    margin-left: 7px;
+}
+
+.status {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 7px;
+}
+
+.i {
+    height: 23px;
+    width: 23px;
+}
+
+.s {
+    width: 23px;
+    height: 23px;
+}
+
+.entete h2 {
+    color: purple;
+    margin-right: 5px;
+}

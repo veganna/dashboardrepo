@@ -1,0 +1,84 @@
+{% extends 'base.html'%}
+{% block title %} Dashbooard | Expenses {% endblock %}
+{% block css %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+{% endblock css %}
+
+
+{% block content %}
+<div class="row mt-3 pt-3" style="background:#fff">
+
+    <div class="col-md-12 dash-item">
+        <div class="border p-3 shadow text-center dash-item-inner">
+            <h1 >Expenses Overview</h1>
+            <hr>
+            <canvas id="expenseChart" width="800" height="200em"></canvas>
+        </div>
+    </div>
+    <div class="col-md-12 dash-item" style="background:#fff">
+        <div class="border p-3 shadow text-center dash-item-inner">
+            <h1>Expenses Data</h1>
+            <hr>
+            <table class="table table-light">
+                <tr class="tableLabel">
+                    <th>Name</th>
+                    <th>Ammount</th>
+                    <th>Company</th>
+                    <th>Date</th>
+                </tr>
+                {% for item in expenses_list %}
+                    
+                    <tr class="transaction">
+                    {% for i in item %}
+                        <td class="tableItem">{{ i }}</td>
+                    {% endfor %} 
+                    </tr>
+                
+                {% endfor %} 
+            </table>
+            
+        </div>
+    </div>
+   
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+
+
+<script>
+    
+
+
+    const ctx3 = document.getElementById('expenseChart').getContext('2d');
+const expenseChart = new Chart(ctx3, {
+    type: 'line',
+    data: {
+        labels: [{% for item in transaction_labels  %}'{{ item }}', {% endfor %} ],
+        datasets: [
+        {
+            label: 'Expenses',
+            data: [{% for item in expense_data  %}'{{ item }}', {% endfor %} ],
+            backgroundColor: [
+                'rgba(233, 53, 53, .3)',
+            ],
+            borderColor: [
+                'rgba(233, 53, 53, 1)',
+            ],
+            borderWidth: 2
+        },
+    
+    ]
+    },
+    options: {
+    }
+});
+
+</script>
+
+{% endblock %}

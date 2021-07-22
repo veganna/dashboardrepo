@@ -1,0 +1,162 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Horizon | Chat{% endblock title %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/chat-style.css' %}"> {% endblock css %} {% block content %}
+<div class="grad"></div>
+<div class="main_body">
+    <div class="left">
+        <div class="left1">
+            <h3>HorizonDev | {{user.first_name}}</h3>
+        </div>
+        <div class="left3">
+            <ul>
+                <li>
+                    <div id="chat-scroll" class="friend {{user.id}}">
+                        <div class="img_name">
+                            <img src="{{user.profile_image.url}}">
+                            <div>
+                                <h4>{{user.first_name}} {{user.last_name}}</h4>
+                                <p>{{user.about}}</p>
+                                <input style="display: none;" id="userName-{{user.id}}" type="text" value="{{user.first_name}}">
+                                <input style="display: none;" id="roomName-{{user.id}}" type="text" value="room-{{user.username}}">
+                            </div>
+                        </div>
+                        <div class="time"> {% if user.is_active %}Online{%else%}Offline{% endif %} </div>
+                    </div>                    
+                </li>
+                {% for username in users %}
+                    {% if username.id == user.id %}
+                    {% else %}
+                <li>
+                    <div id="chat-scroll" class="friend {{username.id}}">
+                        <div class="img_name">
+                            <img src="{{username.profile_image.url}}">
+                            <div>
+                                <h4>{{username.first_name}} {{username.last_name}}</h4>
+                                <p>{{username.about}}</p>
+                                <input style="display: none;" id="userName-{{username.id}}" type="text" value="{{user.first_name}}">
+                                <input style="display: none;" id="roomName-{{username.id}}" type="text" value="room-{{username.username}}">
+                            </div>
+                        </div>
+                        <div class="time"> {% if username.is_active %}Online{%else%}Offline{% endif %} </div>
+                    </div>                    
+                </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="right">
+        <div class="right1">
+            <div class="img_name">
+                <img src="{{user.profile_image.url}}">
+                <div>
+                    <h4>{{user.first_name}}</h4>
+                    <p>{% if user.is_active %}Online{% else %} Offline{% endif %}</p>
+                </div>
+            </div>
+            <div class="icos">
+                <div class="svg_ico">
+                    <img class="i" src="{% static 'img/ore.svg'%}">
+                </div>
+            </div>
+        </div>
+        <div id="chat-box" class="right2"><br>
+            <ul id="chat">
+            {% for m in messages %}
+                <li class=" {% if m.username == user.first_name %}me{%else%}you{% endif %} ">
+                    <div class="entete">
+                        <h2>{{m.username}}<h2>
+                        <h3>{{m.date_added}}</h3>
+                    </div>
+                    <div class="triangle"></div>
+                    <div class="message">
+                        <p class="mess">{{m.content}}</p>
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="right3">
+            <div class="form">
+                <input id="send-message" type="text" name="chat-input" placeholder="Type Your Message" class="in2">
+                <button id="send-message-button" class="ico11"><img src="{% static 'img/send.svg'%}" class="s"></button>
+            </div>
+        </div>
+    </div>
+</div>
+ {% endblock content %} 
+{% block script %} 
+{{ room_name|json_script:"json-roomname" }} {{ username|json_script:"json-username" }}
+{% for username in users %}
+<script>
+    $(document).ready(function() {
+        $(".{{username.id}}").click(function() {
+            var room{{username.id}} = document.querySelector('#roomName-{{username.id}}').value;
+            var user{{username.id}} = document.querySelector('#userName-{{username.id}}').value;
+            var urlmain = window.location.hostname
+            location.href = 'http://' + urlmain +':8000'+ '/chat/' + room{{username.id}} + '/?username=' + user{{username.id}}          
+        });
+    });
+</script>
+{% endfor %} 
+<script>
+    function scrollToBottom() {
+        let objDiv = document.getElementById("chat");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    }
+
+    scrollToBottom();
+
+    const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
+    const userName = JSON.parse(document.getElementById('json-username').textContent);
+
+    const chatSocket = new WebSocket(
+        'ws://' +
+        window.location.host +
+        '/ws/' +
+        roomName +
+        '/'
+    );
+
+    chatSocket.onmessage = function(e) {
+        console.log('onmessage');
+
+        const data = JSON.parse(e.data);
+
+        if (data.message) {
+            var userverify = '{{user.first_name}}';
+            if (data.username == userverify)
+            {
+                document.querySelector('#chat').innerHTML += ('<li class="me">' + '<div class="entete">' + '<h3>'+ data.username +'</h3>' + '<span class="status blue"></span>' + '</div>' + '<div class="triangle"></div>' + '<div class="message">' + '<p class="mess">' + data.message + '</p>' + '</div>' + '</li>')
+            } 
+            else 
+            {
+                document.querySelector('#chat').innerHTML += ('<li class="you">' + '<div class="entete">' + '<h3>'+ data.username +'</h3>' + '</div>' + '<div class="triangle"></div>' + '<div class="message">' + '<p class="mess">' + data.message + '</p>' + '</div>' + '</li>')
+            }
+
+        }
+        else 
+        {
+            alert('The message is empty!');
+        }
+
+        scrollToBottom();
+    };
+
+    chatSocket.onclose = function(e) {
+        console.log('The socket close unexpectadly');
+    };
+
+    document.querySelector('#send-message-button').onclick = function(e) {
+        const messageInputDom = document.querySelector('#send-message');
+        const message = messageInputDom.value;
+
+        chatSocket.send(JSON.stringify({
+            'message': message,
+            'username': userName,
+            'room': roomName
+        }));
+
+        messageInputDom.value = '';
+    };
+</script>
+{% endblock script %}

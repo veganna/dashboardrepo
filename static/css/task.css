@@ -1,0 +1,155 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto';
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    overflow-x: hidden !important;
+    background: linear-gradient(to right, purple, #fff) !important;
+}
+
+.center-align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5em;
+}
+
+.modallist {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    flex-direction: column;
+    width: 70vw;
+    height: auto;
+    border: solid rgba(0, 0, 0, 0.2) 1px;
+    padding: 1.5em;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    background: #eeeeee;
+}
+
+.modallist .content {
+    width: 65vw;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 1em;
+    border: solid rgba(0, 0, 0, 0.1) 1px;
+    color: purple;
+    cursor: pointer;
+    margin: 1px;
+    border-radius: 10px;
+}
+
+.modallist .content:hover {
+    background: #eee;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    overflow-y: hidden;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal .modal-bg {
+    width: 60vw;
+    height: 600px;
+    background: #fff;
+    padding: 2em;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal .modal-bg .header-modal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(60vw - 4em);
+    height: 100px;
+    color: purple;
+    background: #eeeeee;
+    padding: 1em;
+    border-radius: 10px;
+    box-shadow: 0 2px 1px rgba(128, 0, 128, 0.4);
+}
+
+.modal .modal-bg .header-modal .exit-icon {
+    font-size: 20px;
+    color: black;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    transition: 1s;
+}
+
+.modal .modal-bg .header-modal .exit-icon:hover {
+    color: red;
+    transform: rotate(360deg) translateZ(0);
+}
+
+.modal .modal-bg .content-modal {
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: left;
+}
+
+.modal .modal-bg .content-modal p {
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.modal .modal-bg .content-modal .about {
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.modal .modal-bg .content-modal .about p {
+    padding: 5px;
+    overflow-x: hidden;
+}
+
+.modal .modal-bg .content-modal a {
+    width: 150px;
+    text-decoration: none;
+    color: #fff;
+    background: purple;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    transition: .3s;
+    margin-top: 0;
+}
+
+.modal .modal-bg .content-modal a:hover {
+    border: solid 1px purple;
+    color: purple;
+    background: #fff;
+    margin-top: -10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}

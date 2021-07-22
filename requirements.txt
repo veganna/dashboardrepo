@@ -1,0 +1,5 @@
+django==3.2.5
+pillow
+requests
+channels
+channels_redis

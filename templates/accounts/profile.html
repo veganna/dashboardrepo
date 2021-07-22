@@ -1,0 +1,66 @@
+{% extends 'base.html'%}_{% load static %} {% block title %}{{user.first_name}}{% endblock title %} {% block css %}
+<link rel="stylesheet" href="{% static 'css/profile.css'%}">
+<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>{% endblock css %} {% block content %}
+<div class="profile-wrapper">
+    <div class="profile-card js-profile-card">
+        <div class="profile-card__img">
+            <img src="{{user.profile_image.url}}" alt="profile">
+        </div>
+        <div class="profile-card__cnt js-profile-cnt">
+            <div class="profile-card__name">{{user.first_name}} {{user.last_name}}</div>
+            <div class="profile-card__txt">{{user.about}},<strong> {{user.job_function}}</strong></div>
+            <div class="profile-card-loc">
+                <span class="profile-card-loc__icon">
+                    <i class="fas fa-map-marker-alt"></i>
+
+                </span>
+                <span class="profile-card-loc__txt"> {{user.city}} </span>
+            </div>
+            <div class="profile-card-inf">
+                <div class="profile-card-inf__item">
+                    <div class="profile-card-inf__title">{{user.stars}}</div>
+                    <div class="profile-card-inf__txt">Stars</div>
+
+                </div>
+
+                <div class="profile-card-inf__item">
+                    <div class="profile-card-inf__title">{{user.jobs}}</div>
+                    <div class="profile-card-inf__txt">Succesful Jobs</div>
+
+                </div>
+
+                <div class="profile-card-inf__item">
+                    <div class="profile-card-inf__title">{{user.date_joined.month}} / {{user.date_joined.year}} </div>
+                    <div class="profile-card-inf__txt">Since</div>
+
+                </div>
+
+                <div class="profile-card-inf__item">
+                    <div class="profile-card-inf__title">{{user.years_old.year}}</div>
+                    <div class="profile-card-inf__txt">Birthday</div>
+
+                </div>
+
+            </div>
+
+            <div class="profile-card-social">
+                <a class="profile-card-social__item facebook"></a>
+                <a class="profile-card-social__item twitter"></a>
+                <a class="profile-card-social__item instagram"></a>
+                <a class="profile-card-social__item behance"></a>
+                <a class="profile-card-social__item github"></a>
+                <a class="profile-card-social__item codepen"></a>
+                <a class="profile-card-social__item link"></a>
+            </div>
+            <p style='font-size:1rem; padding:15px; font-weight: 500; color: purple;'>{{motivational}}</p>
+            <div class="profile-card-ctr">
+                <button class="profile-card__button button--blue js-message-btn">Chats</button>
+                <button class="profile-card__button button--orange">Tasks</button>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+{% endblock content %} {% block script %} {% endblock script %}
